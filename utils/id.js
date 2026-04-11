@@ -40,24 +40,3 @@ export const generateAdminId = (admins, role) => {
   max++;
   return max < 10 ? `${prefix}0${max}` : `${prefix}${max}`;
 };
-
-// //测试数据
-// const admins = [
-//   {
-//     adminID: "s01",
-//     adminname: "admin",
-//     password: "123456",
-//     phone: "13800000000",
-//     role: "super_admin",
-//   },
-//   {
-//     adminID: "c01",
-//     adminname: "guozhao",
-//     password: "280101",
-//     phone: "13800000001",
-//     role: "common_admin",
-//   },
-// ];
-
-// let res = generateAdminId(admins, "common_admin");
-// console.log(res);
