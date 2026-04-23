@@ -1,6 +1,6 @@
 import express from "express";
-import adminRouter from "./hooks/admin.js";
-import userRouter from "./hooks/user.js";
+import adminRouter from "./apps/admin.js";
+import userRouter from "./apps/user.js";
 import cors from "cors";
 import createUsersDB from "./tools/createDB.js";
 
