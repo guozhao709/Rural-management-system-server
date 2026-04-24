@@ -36,14 +36,15 @@ router.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   const result = deleteVillagerById(id);
   if (result.changes > 0) {
-    res.json({ message: "村民信息删除成功" });
+    res.json({ message: "OK" });
   } else {
     res.status(404).json({ message: "未找到该村民信息" });
   }
 });
 // 更新某个村民的信息
-router.put("/update/:id", (req, res) => {
+router.post("/update/:id", (req, res) => {
   const { id } = req.params;
+  
   const { name, phone, address, birthday, gender, password } = req.body;
   const result = updateVillagerById(id, {
     name,
@@ -54,7 +55,7 @@ router.put("/update/:id", (req, res) => {
     password,
   });
   if (result.changes > 0) {
-    res.json({ message: "村民信息更新成功" });
+    res.json({ message: "OK" });
   } else {
     res.status(404).json({ message: "未找到该村民信息" });
   }

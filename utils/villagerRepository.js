@@ -29,6 +29,7 @@ export const getVillagersCount = () => {
 // 根据id删除村民信息
 export const deleteVillagerById = (id) => {
   // run() 执行 增/删/改 操作，返回受影响的行数
+  console.log("删除的村民Id:", id);
   return db.prepare(`DELETE FROM users WHERE id = ?`).run(id);
 };
 
