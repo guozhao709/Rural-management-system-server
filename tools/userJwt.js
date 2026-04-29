@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 // 密钥
 const secret_key = "Userguozhao";
 
-// 生成管理员的token
+// 生成用户的token
 export const getUserToken = (user) => {
   const {name, phone } = user;
   const token = jwt.sign({name, phone}, secret_key, {
@@ -24,6 +24,6 @@ export const authMiddleware = (req, res, next) =>{
         req.user = payload;
         next();
     } catch (error) {
-        res.status(401).send({ msg: "token 无效", error });
+        res.status(401).send({success: false, msg: "token 无效", error });
     }
 }

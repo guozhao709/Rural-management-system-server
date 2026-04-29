@@ -1,6 +1,7 @@
 import express from "express";
 import { userRegister, userLogin } from "../../tools/userStorage.js";
 import { getUserToken } from "../../tools/userJwt.js";
+import {authMiddleware} from "../../tools/userJwt.js"
 
 
 
@@ -53,6 +54,15 @@ router.post("/login", (req, res) => {
             message: backData.message,
         });
     }
+});
+
+// 判断token是否有效
+router.get("/checkToken", authMiddleware ,(req, res) => {
+    // token有效, token如果无效, 在中间件进行处理
+    res.json({
+        success: true,
+        message: "token 有效",
+    });
 });
 
 export default router;
