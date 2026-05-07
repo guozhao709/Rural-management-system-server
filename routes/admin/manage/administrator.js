@@ -6,20 +6,28 @@ import { writeAllAdmin } from "../../../utils/adminStorage.js";
 const router = express.Router();
 
 // 返回管理员的全部信息
-router.get("/list", async (req, res) => {
+router.get("/lists", async (req, res) => {
   const adminArr = await readAdmin();
-  res.json(adminArr);
+  res.json({
+    code: 200,
+    success: true,
+    message: "获取成功",
+    data: adminArr,
+  });
 });
 
 // 删除管理员
-router.post("/delAdmin", async (req, res) => {
-  const { adminID } = req.body;
+router.delete("/:id", async (req, res) => {
+  console.log(req.params);
+  
+  const { id } = req.params;
   const adminArr = await readAdmin();
-  const index = adminArr.findIndex((item) => item.adminID === adminID);
+  const index = adminArr.findIndex((item) => item.adminID === id);
 
   if (index === -1) {
     return res.status(404).json({
       code: 404,
+      success: false,
       message: "管理员不存在",
       data: null,
     });
@@ -29,13 +37,14 @@ router.post("/delAdmin", async (req, res) => {
   await writeAllAdmin(adminArr);
   res.json({
     code: 200,
+    success: true,
     message: "删除成功",
     data: null,
   });
 });
 
 // 更新管理员
-router.post("/updateAdmin", async (req, res) => {
+router.put("/:id", async (req, res) => {
   console.log(req.body);
 
   const { adminID, adminname, password, phone, role } = req.body;
@@ -45,6 +54,7 @@ router.post("/updateAdmin", async (req, res) => {
   if (index === -1) {
     return res.status(404).json({
       code: 404,
+      success: false,
       message: "管理员不存在",
       data: null,
     });
@@ -58,6 +68,7 @@ router.post("/updateAdmin", async (req, res) => {
   await writeAllAdmin(adminArr);
   res.json({
     code: 200,
+    success: true,
     message: "更新成功",
     data: null,
   });

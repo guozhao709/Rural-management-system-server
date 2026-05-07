@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 // 获取村民列表
-router.get("/list", (req, res) => {
+router.get("/lists", (req, res) => {
   // 接收前端传的分页参数（默认：第1页，每页15条）
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.pageSize) || 15;
@@ -32,7 +32,7 @@ router.get("/list", (req, res) => {
 });
 
 // 删除某个村民
-router.delete("/delete/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const { id } = req.params;
   const result = deleteVillagerById(id);
   if (result.changes > 0) {
@@ -42,7 +42,7 @@ router.delete("/delete/:id", (req, res) => {
   }
 });
 // 更新某个村民的信息
-router.post("/update/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const { id } = req.params;
   
   const { name, phone, address, birthday, gender, password } = req.body;

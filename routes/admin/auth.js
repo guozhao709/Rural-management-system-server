@@ -14,6 +14,7 @@ router.post("/register", async (req, res) => {
     if (!admin || !admin.adminname || !admin.password || !admin.role) {
       return res.status(400).json({
         code: 400,
+        success: false,
         message: "缺少必要参数: adminname、password 和 role 不能为空",
         data: null,
       });
@@ -24,6 +25,7 @@ router.post("/register", async (req, res) => {
     if (!Array.isArray(admins)) {
       return res.status(500).json({
         code: 500,
+        success: false,
         message: "读取管理员数据失败",
         data: null,
       });
@@ -36,6 +38,7 @@ router.post("/register", async (req, res) => {
     if (existingAdmin) {
       return res.status(409).json({
         code: 409,
+        success: false,
         message: "管理员名称已存在",
         data: null,
       });
@@ -46,6 +49,7 @@ router.post("/register", async (req, res) => {
     if (!adminID) {
       return res.status(500).json({
         code: 500,
+        success: false,
         message: "生成管理员ID失败",
         data: null,
       });
@@ -58,6 +62,7 @@ router.post("/register", async (req, res) => {
     if (success) {
       return res.status(201).json({
         code: 201,
+        success: true,
         message: "注册成功",
         data: {
           adminID,
@@ -66,6 +71,7 @@ router.post("/register", async (req, res) => {
     } else {
       return res.status(500).json({
         code: 500,
+        success: false,
         message: "注册失败，请重试",
         data: null,
       });
@@ -74,6 +80,7 @@ router.post("/register", async (req, res) => {
     console.error("Register error:", err);
     res.status(500).json({
       code: 500,
+      success: false,
       message: "服务器内部错误",
       data: null,
     });
@@ -88,6 +95,7 @@ router.post("/login", async (req, res) => {
     if (!adminname || !password) {
       return res.status(400).json({
         code: 400,
+        success: false,
         message: "缺少必要参数: adminname 和 password 不能为空",
         data: null,
       });
@@ -98,6 +106,7 @@ router.post("/login", async (req, res) => {
     if (!Array.isArray(adminArr)) {
       return res.status(500).json({
         code: 500,
+        success: false,
         message: "读取管理员数据失败",
         data: null,
       });
@@ -108,6 +117,7 @@ router.post("/login", async (req, res) => {
     if (!admin) {
       return res.status(401).json({
         code: 401,
+        success: false,
         message: "管理员不存在",
         data: null,
       });
@@ -117,6 +127,7 @@ router.post("/login", async (req, res) => {
     if (admin.password !== password) {
       return res.status(401).json({
         code: 401,
+        success: false,
         message: "密码错误",
         data: null,
       });
@@ -127,6 +138,7 @@ router.post("/login", async (req, res) => {
     if (!adminToken) {
       return res.status(500).json({
         code: 500,
+        success: false,
         message: "生成令牌失败",
         data: null,
       });
@@ -135,6 +147,7 @@ router.post("/login", async (req, res) => {
     // 成功响应
     res.status(200).json({
       code: 200,
+      success: true,
       message: "登录成功",
       data: {
         admin,
@@ -145,6 +158,7 @@ router.post("/login", async (req, res) => {
     console.error("Login error:", err);
     res.status(500).json({
       code: 500,
+      success: false,
       message: "服务器内部错误",
       data: null,
     });

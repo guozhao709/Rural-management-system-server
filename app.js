@@ -1,14 +1,19 @@
+import "dotenv/config";
 import express from "express";
 import adminRouter from "./apps/admin.js";
 import userRouter from "./apps/user.js";
 import cors from "cors";
 import createUsersDB from "./tools/createDB.js";
+const port = process.env.PORT || 3000;
 
+
+// 创建用户表(如果有就跳过，没有就创建)
 createUsersDB();
 
-
+// 创建 express 应用
 const app = express();
 
+// 解决跨域问题
 app.use(cors({
   origin:[
     'http://127.0.0.1:8080', // B端
@@ -24,7 +29,6 @@ app.use(cors({
 // 用来解析 json文件
 app.use(express.json())
 
-
 // 管理员路由
 adminRouter(app);
 // 用户路由
@@ -34,6 +38,6 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

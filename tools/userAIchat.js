@@ -6,10 +6,16 @@ import openAI from "openai";
 // 3. 要考虑存储, 用map映射, 一个id一个对话记录
 // 4. 存储就临时存储在内存中, 就先不写入数据库了, 这个实现完成再看效果
 
+const kimiKey = process.env.KIMI_API_KEY;
+
+if (!kimiKey) {
+  throw new Error("Missing KIMI_API_KEY. Please set KIMI_API_KEY in the root .env file.");
+}
+
 const chatMap = new Map();
 
 const client = new openAI({
-  apiKey: "sk-TD3I8CJiKmLE97mZQE4QgBampU5VZdKWJmTEZJkJnt805dP5",
+  apiKey: kimiKey,
   baseURL: "https://api.moonshot.cn/v1",
 });
 
