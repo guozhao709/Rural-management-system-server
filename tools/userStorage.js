@@ -1,5 +1,8 @@
-import db from "../db/index.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+import db from "../db/index.js";
 // 用户注册存储
 export const userRegister = (user) => {
   const { phone, password, name, gender, birthday, address } = user;
@@ -39,7 +42,6 @@ export const userRegister = (user) => {
 
 // 用户登录查询
 export const userLogin = (loginInfo) => {
-
   const { phone, password } = loginInfo;
 
   // 1. 预编译语句（性能更好，且能防止 SQL 注入）
@@ -51,7 +53,7 @@ export const userLogin = (loginInfo) => {
     // 2. 执行查询
     const user = stmt.get(phone, password);
 
-    if(!user){
+    if (!user) {
       return {
         success: false,
         message: "登录失败, 手机号或密码错误",
@@ -59,13 +61,12 @@ export const userLogin = (loginInfo) => {
     }
     // 3. 返回成功结果和用户信息
     console.log("sql", user);
-    
+
     return {
       success: true,
       user,
     };
   } catch (error) {
-
     // 4. 其他未知错误
     console.error("数据库写入失败:", error.message);
     return {
@@ -73,4 +74,19 @@ export const userLogin = (loginInfo) => {
       message: "登录失败, 手机号或密码错误",
     };
   }
+};
+
+// 读取skill文件
+// 获取data文件夹的绝对地址
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_DIR = path.resolve(__dirname, "../prompts");
+
+// skill文件的绝对地址
+// const SKILL_FILE = path.resolve(DATA_DIR, "agriculture.system.txt");
+export const systemPrompt = () => {
+  return fs.readFileSync(
+    path.join(DATA_DIR, "agriculture.system.txt"),
+    "utf-8",
+  );
 };
