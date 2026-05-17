@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import adminRouter from "./apps/admin.js";
-import userRouter from "./apps/user.js";
+import adminRouter from "./app/admin.js";
+import userRouter from "./app/user.js";
 import cors from "cors";
-import createUsersDB from "./tools/createDB.js";
+import createUsersDB from "./client/tools/createDB.js";
 const port = process.env.PORT || 3000;
 
 

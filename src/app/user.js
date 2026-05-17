@@ -1,7 +1,7 @@
-import userAuthRoutes from "../routes/client/userAuth.js";
-import { authMiddleware } from "../tools/userJwt.js";
-import userAIchatRoutes from "../routes/client/userAIchatWeb.js";
-import userAgricultureRoutes from "../routes/client/userAgriculture.js";
+import userAuthRoutes from "../client/routes/userAuth.js";
+import { authMiddleware } from "../client/tools/userJwt.js";
+import userAIchatRoutes from "../client/routes/userAIchatWeb.js";
+import userAgricultureRoutes from "../client/routes/userAgriculture.js";
 
 const userRouter = (app) => {
   // 用户注册和登录路由

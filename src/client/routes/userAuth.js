@@ -1,7 +1,7 @@
 import express from "express";
-import { userRegister, userLogin } from "../../tools/userStorage.js";
-import { getUserToken } from "../../tools/userJwt.js";
-import {authMiddleware} from "../../tools/userJwt.js"
+import { userRegister, userLogin } from "../tools/userStorage.js";
+import { getUserToken } from "../tools/userJwt.js";
+import {authMiddleware} from "../tools/userJwt.js"
 
 
 

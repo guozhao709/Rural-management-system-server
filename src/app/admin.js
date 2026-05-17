@@ -1,7 +1,7 @@
-import authRoutes from "../routes/admin/auth.js";
-import administratorRoutes from "../routes/admin/manage/administrator.js";
-import villagerRoutes from "../routes/admin/manage/villagers.js";
-import { authMiddleware } from "../utils/adminJWT.js";
+import authRoutes from "../admin/routes/auth.js";
+import administratorRoutes from "../admin/routes/manage/administrator.js";
+import villagerRoutes from "../admin/routes/manage/villagers.js";
+import { authMiddleware } from "../admin/utils/adminJWT.js";
 
 const adminRouter = (app) => {
   // 管理员注册和登录路由

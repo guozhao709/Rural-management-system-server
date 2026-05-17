@@ -1,8 +1,8 @@
 import express from "express";
-import { writeAdmin } from "../../utils/adminStorage.js";
-import { readAdmin } from "../../utils/adminStorage.js";
-import { getAdminToken } from "../../utils/adminJWT.js";
-import { generateAdminId } from "../../utils/adminId.js";
+import { writeAdmin } from "../utils/adminStorage.js";
+import { readAdmin } from "../utils/adminStorage.js";
+import { getAdminToken } from "../utils/adminJWT.js";
+import { generateAdminId } from "../utils/adminId.js";
 
 const router = express.Router();
 

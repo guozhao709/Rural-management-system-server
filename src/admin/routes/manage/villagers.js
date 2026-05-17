@@ -5,7 +5,7 @@ import {
   getVillagersCount,
   deleteVillagerById,
   updateVillagerById,
-} from "../../../utils/villagerRepository.js";
+} from "../../utils/villagerRepository.js";
 const router = express.Router();
 
 // 获取村民列表

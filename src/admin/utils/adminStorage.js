@@ -5,7 +5,8 @@ import { fileURLToPath } from "url";
 // 获取data文件夹的绝对地址
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_DIR = path.resolve(__dirname, "../data");
+const DATA_DIR = path.resolve(__dirname, "../../../data/admin");
+fs.ensureDirSync(DATA_DIR);
 
 // 管理员信息文件的绝对地址
 const ADMIN_FILE = path.resolve(DATA_DIR, "admin.json");

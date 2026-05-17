@@ -1,4 +1,4 @@
-import db from "../db/index.js";
+import db from "../../client/db/index.js";
 
 // 获取村民列表
 export const getVillagers = () => {

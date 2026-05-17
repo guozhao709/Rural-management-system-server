@@ -1,5 +1,5 @@
 import express from "express";
-import {getAgriculture} from "../../tools/userAgriculture.js";
+import {getAgriculture} from "../tools/userAgriculture.js";
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import express from "express";
 
-import { readAdmin } from "../../../utils/adminStorage.js";
-import { writeAllAdmin } from "../../../utils/adminStorage.js";
+import { readAdmin } from "../../utils/adminStorage.js";
+import { writeAllAdmin } from "../../utils/adminStorage.js";
 
 const router = express.Router();
 

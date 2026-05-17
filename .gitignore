@@ -1,33 +1,33 @@
-# 依赖文件夹
+# Dependencies
 node_modules/
 
-# 日志文件
+# Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# 环境变量文件（敏感信息）
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# 构建产物
+# Build output
 dist/
 build/
 out/
 
-# IDE 配置文件
+# Runtime database files
+*.db
+
+# IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# 操作系统文件
+# OS files
 .DS_Store
 Thumbs.db
-
-// 数据库文件
-*.db

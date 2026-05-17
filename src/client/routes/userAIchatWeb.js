@@ -1,5 +1,5 @@
 import express from "express";
-import chatStream from "../../tools/userAIchat.js";
+import chatStream from "../tools/userAIchat.js";
 
 const router = express.Router();
 
