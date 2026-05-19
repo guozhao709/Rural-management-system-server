@@ -1,7 +1,9 @@
 import { systemPrompt } from "./userStorage.js";
+import { normalizeCropName } from "./userAgrDic.js";
+import db from "../db/index.js";
 import OpenAI from "openai";
 
-const crop = "小麦";
+// 先模拟数据,, 后续通过admin上传至数据库
 const localEnvironment = {
   region: "陕西省西安市长安区",
   soilType: "黄土土壤",
@@ -61,7 +63,23 @@ const client = new OpenAI({
   baseURL: "https://api.moonshot.cn/v1",
 });
 
+export const saveCropAnalysis = ({ cropName, region, analysisText }) => {
+  const stmt = db.prepare(`
+    INSERT INTO crop_analysis (crop_name, region, analysis_text)
+    VALUES (?, ?, ?)
+    ON CONFLICT(crop_name, region) DO UPDATE SET
+      analysis_text = excluded.analysis_text,
+      updated_at = CURRENT_TIMESTAMP
+  `);
+
+  return stmt.run(cropName, region, analysisText);
+};
+
 export const getAgriculture = async (crop) => {
+
+  // 先规范化作物名称, 以便于后续查询和提示
+  const cropName = normalizeCropName(crop);
+
   const completion = await client.chat.completions.create({
     model: "kimi-k2.6",
 
@@ -75,7 +93,7 @@ export const getAgriculture = async (crop) => {
         role: "user",
         content: `
 作物名称：
-${crop}
+${cropName}
 
 本地农业环境：
 ${JSON.stringify(localEnvironment)}
@@ -94,7 +112,12 @@ ${JSON.stringify(marketData)}
 
   const text = completion.choices[0].message.content;
 
-  console.log("当地农业情况:", text);
+  // 将生成的文本存储到数据库
+  saveCropAnalysis({
+    cropName: cropName,
+    region: localEnvironment.region,
+    analysisText: text,
+  });
 
-  return text;
+  return {cropName, text};
 };
