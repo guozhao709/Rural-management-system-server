@@ -76,7 +76,6 @@ export const saveCropAnalysis = ({ cropName, region, analysisText }) => {
 };
 
 export const getAgriculture = async (crop) => {
-
   // 先规范化作物名称, 以便于后续查询和提示
   const cropName = normalizeCropName(crop);
 
@@ -112,6 +111,9 @@ ${JSON.stringify(marketData)}
 
   const text = completion.choices[0].message.content;
 
+  // 生成服务器时间
+  const now = new Date();
+
   // 将生成的文本存储到数据库
   saveCropAnalysis({
     cropName: cropName,
@@ -119,5 +121,9 @@ ${JSON.stringify(marketData)}
     analysisText: text,
   });
 
-  return {cropName, text};
+  return {
+    cropName,
+    text,
+    analysisTime: `${now.getFullYear()}-${String(now.getMonth() + 1)}-${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`,
+  };
 };

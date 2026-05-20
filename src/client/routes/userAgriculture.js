@@ -23,7 +23,7 @@ router.get("/info/db/:crop", async (req, res) => {
   const { crop } = req.params;
   const cropName = normalizeCropName(crop);
 
-  const analysis = db
+  const analysisTable = db
     .prepare(
       `
       SELECT analysis_text, updated_at
@@ -34,6 +34,11 @@ router.get("/info/db/:crop", async (req, res) => {
       `,
     )
     .get(cropName);
+
+  const analysis = {
+    text: analysisTable?.analysis_text,
+    analysisTime: analysisTable?.updated_at,
+  };
 
   res.json({
     code: 200,
