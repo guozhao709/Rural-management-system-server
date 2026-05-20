@@ -36,6 +36,31 @@ UNIQUE(crop_name, region)
 )
 `,
   ).run();
+
+  // 创建健康分析表
+  db.prepare(
+    `
+CREATE TABLE IF NOT EXISTS health_analysis (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+user_id TEXT NOT NULL,
+
+basic_info TEXT NOT NULL,
+
+symptoms TEXT NOT NULL,
+
+habits TEXT NOT NULL,
+
+medical_history TEXT NOT NULL,
+
+analysis_json TEXT NOT NULL,
+
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+`,
+  ).run();
 };
 
 export default createUsersDB;

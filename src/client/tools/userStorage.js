@@ -82,11 +82,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_DIR = path.resolve(__dirname, "../prompts");
 
+const readPrompt = (fileName) => {
+  return fs.readFileSync(path.join(DATA_DIR, fileName), "utf-8");
+};
+
 // skill文件的绝对地址
 // const SKILL_FILE = path.resolve(DATA_DIR, "agriculture.system.txt");
 export const systemPrompt = () => {
-  return fs.readFileSync(
-    path.join(DATA_DIR, "agriculture.system.txt"),
-    "utf-8",
-  );
+  return readPrompt("agriculture.system.txt");
+};
+
+export const healthySystemPrompt = () => {
+  return readPrompt("healthy.system.txt");
 };
